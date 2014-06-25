@@ -64,7 +64,7 @@ def buildSimulator(retryBuild):
 
         os.system("sudo mvn -Pdeveloper -pl developer -Ddeploydb")
         os.system("sudo mvn -Pdeveloper -pl developer -Ddeploydb-simulator")
-        os.system("sudo mysql -uroot  -e GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'localhost\' WITH GRANT OPTION")
+        os.system("sudo mysql -uroot  -e \"GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'localhost\' WITH GRANT OPTION\"")
         print "==== Starting Simulator ===="
         os.system("sudo mvn -Dsimulator -pl client jetty:run &")
         print "==== Simulator Successfully Started ===="
