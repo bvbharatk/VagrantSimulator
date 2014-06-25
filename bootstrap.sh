@@ -9,9 +9,9 @@ sudo apt-get install -y build-essential
 sudo apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 echo "==== Step3: Install Python Dev Packages ===="
-sudo apt-get -y install python-setuptools
+sudo apt-get install -y python-setuptools
 sudo apt-get install -y autoconf g++ python2.7-dev
-sudo apt-get install python-pip build-essential 
+sudo apt-get install -y python-pip build-essential 
 
 #sudo apt-get install python-dev
 
