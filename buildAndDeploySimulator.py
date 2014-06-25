@@ -50,7 +50,7 @@ def buildSimulator(retryBuild):
     try:
         out=None
         print "================== Building Simulator Started ================"
-        os.system("echo \"export MAVEN_OPTS=\"-Xmx1024m -XX:MaxPermSize=500m -Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n\" >> ~/.bashrc\"")
+        os.system('sudo echo "export MAVEN_OPTS=\"-Xmx1024m -XX:MaxPermSize=500m -Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n\"" >> ~/.bashrc')
         os.chdir("/automation/cloudstack")
         while (out!=0 and retryBuild!=0):
             try:
