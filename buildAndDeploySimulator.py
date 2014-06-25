@@ -53,7 +53,7 @@ def buildSimulator(retryBuild):
         while (out!=0 and retryBuild!=0):
             try:
               os.chdir("/automation/cloudstack")
-              os.system ("killall -9 java")
+              os.system ("sudo killall -9 java")
               out=execCmd("sudo mvn clean install -P developer -Dsimulator -DskipTests")
             except Exception, e:
               print ("sudo mvn clean  install failed, will retry")
