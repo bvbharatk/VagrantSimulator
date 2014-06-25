@@ -9,13 +9,20 @@ sudo apt-get install -y build-essential
 sudo apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 echo "==== Step3: Install Python Dev Packages ===="
-sudo apt-get install python-dev
+sudo apt-get -y install python-setuptools
+sudo apt-get install -y autoconf g++ python2.7-dev
+sudo apt-get install python-pip build-essential 
+
+#sudo apt-get install python-dev
 
 echo "==== Step4: Install Java 7 ==== "
-sudo apt-get install python-software-properties
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get install oracle-java7-installer
-sudo apt-get install oracle-java7-set-default
+sudo apt-get install -y python-software-properties
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo apt-get update
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+sudo apt-get install -y oracle-java7-installer
+sudo apt-get install -y oracle-java7-set-default
 
 
 echo "==== Step5 : Install Maven ==== "
