@@ -47,25 +47,26 @@ def execCmd(cmd):
 
 
 def buildSimulator(retryBuild):
-    out=None
-    print "================== Building Simulator Started ================"
-    while (out!=0 and retryBuild!=0):
-          try:
+    try:
+        out=None
+        print "================== Building Simulator Started ================"
+        while (out!=0 and retryBuild!=0):
+            try:
               os.chdir("/automation/cloudstack")
               os.system ("killall -9 java")
-              out=execCmd("mvn clean install -P developer -Dsimulator -DskipTests")
-          except Exception, e:
-                 print ("mvn clean  install failed, will retry")
-                 print e
-          retryBuild=retryBuild-1
-    if out!=0:
-       sys.exit(1)
-    try:
-        execCmd("mvn -Pdeveloper -pl developer -Ddeploydb")
-        os.system("mvn -Pdeveloper -pl developer -Ddeploydb-simulator")
-        os.system("mysql -uroot  -e GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'localhost\' WITH GRANT OPTION")
+              out=execCmd("sudo mvn clean install -P developer -Dsimulator -DskipTests")
+            except Exception, e:
+              print ("sudo mvn clean  install failed, will retry")
+              print e
+            retryBuild=retryBuild-1
+        if out != 0:
+            sys.exit(1)
+
+        os.system("sudo mvn -Pdeveloper -pl developer -Ddeploydb")
+        os.system("sudo mvn -Pdeveloper -pl developer -Ddeploydb-simulator")
+        os.system("sudo mysql -uroot  -e GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'localhost\' WITH GRANT OPTION")
         print "==== Starting Simulator ===="
-        os.system("mvn -Dsimulator -pl client jetty:run &")
+        os.system("sudo mvn -Dsimulator -pl client jetty:run &")
         print "==== Simulator Successfully Started ===="
     except Exception, e:
         print "==== Building Simulator Failed ===="
@@ -76,17 +77,18 @@ def buildSimulator(retryBuild):
 def getCSCode(inp_dict):
     repo_url = inp_dict['repo_url']
     branch = inp_dict['branch']
-    os.system("mkdir -p /automation")
+    os.system("sudo rm -rf /automation")
+    os.system("sudo mkdir -p /automation")
     os.chdir("/automation/")
-    os.system("git init;git clone %s "%repo_url)
-    os.system("git fetch origin %s"%branch)
-    os.system("git reset --hard")
-    os.system("git checkout -b %s FETCH_HEAD"%(branch))
+    os.system("sudo git init;git clone %s "%repo_url)
+    os.system("sudo git fetch origin %s"%branch)
+    os.system("sudo git reset --hard")
+    os.system("sudo git checkout -b %s FETCH_HEAD"%(branch))
 
 def runDeployDc():
     print "==== Deploy DataCenter Started ===="  
-    os.system("python2.7 /automation/cloudstack/tools/marvin/setup.py install")
-    os.system("python2.7 /automation/cloudstack/tools/marvin/marvin/deployDataCenter.py -i /automation/cloudstack/setup/dev/advanced.cfg")
+    os.system("sudo python2.7 /automation/cloudstack/tools/marvin/setup.py install")
+    os.system("sudo python2.7 /automation/cloudstack/tools/marvin/marvin/deployDataCenter.py -i /automation/cloudstack/setup/dev/advanced.cfg")
     print "==== Deploy DataCenter Successfull===="  
 
 def main():
