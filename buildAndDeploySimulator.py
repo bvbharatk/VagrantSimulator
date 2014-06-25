@@ -50,11 +50,11 @@ def buildSimulator(retryBuild):
     try:
         out=None
         print "================== Building Simulator Started ================"
+        os.system("echo \"export MAVEN_OPTS=\"-Xmx1024m -XX:MaxPermSize=500m -Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n\" >> ~/.bashrc\"")
+        os.chdir("/automation/cloudstack")
         while (out!=0 and retryBuild!=0):
             try:
-              os.chdir("/automation/cloudstack")
               os.system ("sudo killall -9 java")
-              os.sytem("echo \"export MAVEN_OPTS=\"-Xmx1024m -XX:MaxPermSize=500m -Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n\" >> ~/.bashrc\"")
               out=execCmd("sudo mvn clean install -P developer -Dsimulator -DskipTests")
             except Exception, e:
               print ("sudo mvn clean  install failed, will retry")
