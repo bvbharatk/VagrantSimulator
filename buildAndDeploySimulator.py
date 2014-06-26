@@ -91,7 +91,7 @@ def runDeployDc():
     os.chdir("/automation/cloudstack/tools/marvin")
     os.system("sudo python setup.py install")
     os.chdir("/automation/cloudstack/tools/marvin/marvin")
-    os.system("sudo python deployDataCenter.py -i setup/dev/advanced.cfg")
+    os.system("sudo python deployDataCenter.py -i /automation/cloudstack/setup/dev/advanced.cfg")
     print "==== Deploy DataCenter Successfull===="  
 
 def main():
