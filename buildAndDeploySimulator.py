@@ -88,9 +88,10 @@ def getCSCode(inp_dict):
 
 def runDeployDc():
     print "==== Deploy DataCenter Started ===="  
-    os.chdir("/automation/cloudstack")
-    os.system("sudo python2.7 tools/marvin/setup.py install")
-    os.system("sudo python2.7 tools/marvin/marvin/deployDataCenter.py -i setup/dev/advanced.cfg")
+    os.chdir("/automation/cloudstack/tools/marvin")
+    os.system("sudo python setup.py install")
+    os.chdir("/automation/cloudstack/tools/marvin/marvin")
+    os.system("sudo python deployDataCenter.py -i setup/dev/advanced.cfg")
     print "==== Deploy DataCenter Successfull===="  
 
 def main():
